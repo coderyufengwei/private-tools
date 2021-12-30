@@ -13,6 +13,7 @@ export const isWeixin = () => {
 
 /**
  * @desc:获取URL？后面的参数
+ * @returns {Object}
  */
 export const getRequest = () => {
     let url = location.search;
@@ -49,8 +50,8 @@ export const trimy = (str, type = 2) => {
 /**
  * @desc 浏览器全屏切换
  */
-export const fullscreenToggel = () => {
-    if (fullscreenEnable()) {
+export const fullScreenToggle = () => {
+    if (fullScreenEnable()) {
         exitFullScreen();
     } else {
         reqFullScreen();
@@ -59,13 +60,35 @@ export const fullscreenToggel = () => {
 
 /**
  * @desc 判断浏览器是否全屏
+ * @returns {Boolean}
  */
-export const fullscreenEnable = () => {
+export const fullScreenEnable = () => {
     var isFullscreen =
         document.isFullScreen ||
         document.mozIsFullScreen ||
         document.webkitIsFullScreen;
     return isFullscreen;
+};
+
+/**
+ * @desc esc监听全屏
+ */
+export const listenfullScreen = callback => {
+    function listen() {
+        callback();
+    }
+    document.addEventListener("fullscreenchange", function () {
+        listen();
+    });
+    document.addEventListener("mozfullscreenchange", function () {
+        listen();
+    });
+    document.addEventListener("webkitfullscreenchange", function () {
+        listen();
+    });
+    document.addEventListener("msfullscreenchange", function () {
+        listen();
+    });
 };
 
 /**
