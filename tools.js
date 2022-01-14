@@ -1,4 +1,17 @@
 /**
+ * @desc 遍历树节点
+ * 
+ */
+export const foreachTree = (data, childrenName = 'children', callback) => {
+    for (let i = 0; i < data.length; i++) {
+        callback(data[i]);
+        if (data[i][childrenName] && data[i][childrenName].length > 0) {
+            foreachTree(data[i][childrenName], childrenName, callback);
+        }
+    }
+}
+
+/**
  * @desc 递归生成树形结构 
  * 
  */
